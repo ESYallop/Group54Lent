@@ -8,6 +8,7 @@ geographical data.
 from .utils import sorted_by_key  # noqa
 
 def rivers_with_station(stations):
-    pass
+    rivers = {x.river for x in stations}
+    return rivers
 
 from haversine import haversine, Unit
