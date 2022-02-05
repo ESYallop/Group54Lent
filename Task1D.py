@@ -12,7 +12,8 @@ def run():
 
     #Part 2
     def alphabetical_stations_on_river(river):
-        """Names of the stations located along a river in alphabetical order"""
+        """Arranges the names of the stations located along a river in 
+        alphabetical order"""
         stations_along_river = stations_by_river(stations)
         river_names = [station.name for station in stations_along_river[river]]
         return sorted(river_names)
@@ -22,5 +23,5 @@ def run():
     print("River Thames: " + str(alphabetical_stations_on_river('River Thames')))
 
 if __name__ == "__main__":
-    print("*** Rivers with Monitoring Stations, and Stations Along Various Rivers ***")
+    print("*** Task 1D: CUED Part IA Flood Warning System ***")
     run()

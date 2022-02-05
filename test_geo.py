@@ -1,7 +1,7 @@
 """Unit test for the geo module"""
 
 from floodsystem.stationdata import build_station_list
-from floodsystem.geo import rivers_with_station, stations_by_river
+from floodsystem.geo import rivers_with_station, stations_by_river, rivers_by_station_number
 
 def test_rivers_with_station():
     #build list of stations and rivers
@@ -28,3 +28,16 @@ def test_stations_by_river():
     #compare with number given by function
     stations_along_river = stations_by_river(stations)
     assert cam_station_number == len(stations_along_river['River Cam'])
+
+def test_rivers_by_station_number():
+    #build list of stations and sorted list of rivers
+    stations = build_station_list()
+    top_7_rivers = [v for k,v in rivers_by_station_number(stations, 7)]
+
+    #check that list is sorted properly
+    assert all(top_7_rivers[i] >= top_7_rivers[i + 1] for i in range(len(top_7_rivers)-1))
+
+    #check that max value is correct
+    stations_along_river = stations_by_river(stations)
+    station_numbers_along_river = [len(station) for river, station in stations_along_river.items()]
+    assert top_7_rivers[0] == max(station_numbers_along_river)
