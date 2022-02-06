@@ -24,6 +24,7 @@ class MonitoringStation:
 
         self.coord = coord
         self.typical_range = typical_range
+        #note: typical range is tuple
         self.river = river
         self.town = town
 
@@ -38,3 +39,19 @@ class MonitoringStation:
         d += "   river:         {}\n".format(self.river)
         d += "   typical range: {}".format(self.typical_range)
         return d
+    
+    def typical_range_consistent(self):
+        """Checks whether the typical range data is consistent, 
+        returns boolean value"""
+        if self.typical_range == None:
+            return False
+        elif self.typical_range[1] > self.typical_range[0]:
+            return True
+        else:
+            return False
+        
+def inconsistent_typical_range_stations(stations):
+    """Given list of MonitoringStation objects, returns a list of stations
+    that have inconsistent data."""
+    inconsistent_stations = [station.name for station in stations if MonitoringStation.typical_range_consistent(station) == False]
+    return inconsistent_stations
