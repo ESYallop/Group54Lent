@@ -6,6 +6,7 @@ geographical data.
 
 """
 from .utils import sorted_by_key  # noqa
+import numpy as np
 
 def rivers_with_station(stations):
     """For a list of MonitoringStation objects, returns set with 
@@ -47,38 +48,37 @@ def rivers_by_station_number(stations, N):
 #for 1B
 from math import radians, cos, sin, asin, sqrt
 
-def haversine(lon1, lat1, lon2, lat2):
+def haversine(coord1, coord2):
     """
     Calculate the great circle distance in kilometers between two points 
     on the earth (specified in decimal degrees)
     """
     # convert decimal degrees to radians 
-    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+    radians_coord1 = np.array(coord1) * np.pi/180
+    radians_coord2 = np.array(coord2) * np.pi/180
 
     # haversine formula 
-    dlon = lon2 - lon1 
-    dlat = lat2 - lat1 
-    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    dlon = radians_coord2[1] - radians_coord1[1] 
+    dlat = radians_coord2[0] - radians_coord1[0] 
+    a = sin(dlat/2)**2 + cos(radians_coord1[0]) * cos(radians_coord2[0]) * sin(dlon/2)**2
     c = 2 * asin(sqrt(a)) 
     r = 6371 # Radius of earth in kilometers. Use 3956 for miles. Determines return value units.
     return c * r
 
-#function that, given a list of station objects and a coordinate p, 
-# returns a list of (station, distance) tuples, where distance (float) 
-# is the distance of the station (MonitoringStation) from the coordinate p. 
-# The returned list should be sorted by distance. 
+
 def stations_by_distance(stations, p):
-    stations_by_distance = {}
-    for station in stations:
-        stationDist = haversine(p, station.self.coord)
-        stations_by_distance[stationDist] = station
-    stations_by_distance = sorted(stations_by_distance)
+    """function that, given a list of station objects and a coordinate p, 
+    returns a list of (station, distance) tuples, where distance (float) 
+    is the distance of the station (MonitoringStation) from the coordinate p. 
+    The returned list should be sorted by distance."""
+    stations_by_distance = [(station.name, haversine(p, station.coord)) for station in stations]
+    stations_by_distance = sorted(stations_by_distance, key=lambda tup: tup[1])
     return stations_by_distance
 
 #1C:
-#function that returns a list of all stations (type MonitoringStation) 
-# within radius r of a geographic coordinate x.
 def stations_within_radius(stations, centre, r):
+    """function that returns a list of all stations (type MonitoringStation) 
+    within radius r of a geographic coordinate x."""
     close_stations = []
     for station in stations:
         if haversine(station.coord, centre) < r:
