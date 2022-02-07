@@ -42,3 +42,39 @@ def rivers_by_station_number(stations, N):
         if v in top_values:
             top_N_rivers[k] = v
     return list(({k: v for k, v in sorted(top_N_rivers.items(), key=lambda item: item[1], reverse = True)}).items())
+
+
+#for 1B
+from math import radians, cos, sin, asin, sqrt
+
+def haversine(lon1, lat1, lon2, lat2):
+    """
+    Calculate the great circle distance in kilometers between two points 
+    on the earth (specified in decimal degrees)
+    """
+    # convert decimal degrees to radians 
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+
+    # haversine formula 
+    dlon = lon2 - lon1 
+    dlat = lat2 - lat1 
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a)) 
+    r = 6371 # Radius of earth in kilometers. Use 3956 for miles. Determines return value units.
+    return c * r
+
+#function that, given a list of station objects and a coordinate p, 
+# returns a list of (station, distance) tuples, where distance (float) 
+# is the distance of the station (MonitoringStation) from the coordinate p. 
+# The returned list should be sorted by distance. 
+def stations_by_distance(stations, p):
+    stations_by_distance = {}
+    for station in stations:
+        stationDist = haversine(p, station.self.coord)
+        stations_by_distance[stationDist] = station
+    stations_by_distance = sorted(stations_by_distance)
+
+#1C:
+#function that returns a list of all stations (type MonitoringStation) 
+# within radius r of a geographic coordinate x.
+def stations_within_radius(stations, centre, r)
