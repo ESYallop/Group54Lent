@@ -73,8 +73,14 @@ def stations_by_distance(stations, p):
         stationDist = haversine(p, station.self.coord)
         stations_by_distance[stationDist] = station
     stations_by_distance = sorted(stations_by_distance)
+    return stations_by_distance
 
 #1C:
 #function that returns a list of all stations (type MonitoringStation) 
 # within radius r of a geographic coordinate x.
-def stations_within_radius(stations, centre, r)
+def stations_within_radius(stations, centre, r):
+    close_stations = []
+    for station in stations:
+        if haversine(station.coord, centre) < r:
+         close_stations.append(station)
+    return close_stations.sort()
