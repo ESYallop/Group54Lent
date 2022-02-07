@@ -6,7 +6,7 @@ from floodsystem.stationdata import build_station_list
 
 def run(p):
     stations = build_station_list()
-    distances = stations_by_distance(stations)
-    stations_by_distance = (stations_by_distance(stations, p))
+    stations_by_distance = stations_by_distance(stations, p)
+    p = (52.2053, 0.1218)
     print stations_by_distance[:10]
-    print stations_by_distance(-10:)
+    print stations_by_distance[-10:]
