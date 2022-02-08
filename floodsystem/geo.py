@@ -83,4 +83,4 @@ def stations_within_radius(stations, centre, r):
     for station in stations:
         if haversine(station.coord, centre) < float(r):
             close_stations.append(station)
-    return close_stations.sort()
+    return sorted(close_stations)
