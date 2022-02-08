@@ -5,7 +5,7 @@
 geographical data.
 
 """
-from .utils import sorted_by_key  # noqa
+from utils import sorted_by_key  # noqa
 import numpy as np
 
 def rivers_with_station(stations):
@@ -81,6 +81,6 @@ def stations_within_radius(stations, centre, r):
     within radius r of a geographic coordinate x."""
     close_stations = []
     for station in stations:
-        if haversine(station.coord, centre) < r:
-         close_stations.append(station)
+        if haversine(station.coord, centre) < float(r):
+            close_stations.append(station)
     return close_stations.sort()
