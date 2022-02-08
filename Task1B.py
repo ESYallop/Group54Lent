@@ -5,11 +5,10 @@ def run():
     stations = build_station_list()
     p = (52.2053, 0.1218)
     list_stations_by_distance = stations_by_distance(stations, p)
-
     station_towns = {}
     for station in stations:
         station_towns[station.name] = station.town
-    stations_by_distance = [(station.name, station_towns[station.name], haversine(p, station.coord)) for station in stations]
+    liststations_by_distance = [(station.name, station_towns[station.name], haversine(p, station.coord)) for station in stations]
 
     #station, dict[station], dist
     print("Closest 10")
