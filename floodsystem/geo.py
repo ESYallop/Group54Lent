@@ -71,8 +71,8 @@ def stations_by_distance(stations, p):
     returns a list of (station, distance) tuples, where distance (float) 
     is the distance of the station (MonitoringStation) from the coordinate p. 
     The returned list should be sorted by distance."""
-    stations_by_distance = [(station.name, station.town, haversine(p, station.coord)) for station in stations]
-    stations_by_distance = sorted(stations_by_distance, key=lambda tup: tup[2])
+    stations_by_distance = [(station.name, haversine(p, station.coord)) for station in stations]
+    stations_by_distance = sorted(stations_by_distance, key=lambda tup: tup[1])
     return stations_by_distance
 
 #1C:
