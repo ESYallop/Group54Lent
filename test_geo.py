@@ -60,5 +60,5 @@ def test_stations_within_radius(stations, centre, r):
         if haversine(station, r) < 10:
             radius_station_number +=1
     #compare with number given by function
-    stations_and_towns_by_distance = stations_by_distance(stations)
-    assert radius_station_number == len(stations_by_distance)
+    stations_and_towns_by_distance = stations_within_radius(stations)
+    assert radius_station_number == len(stations_and_towns_by_distance)
