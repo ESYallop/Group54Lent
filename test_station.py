@@ -84,28 +84,3 @@ def test_relative_water_level():
     half.latest_level = None
     assert half.relative_water_level() == None
 
-def test_stations_level_over_threshold():
-    # Create some stations with different relative water levels
-    s_id = "test-s-id"
-    m_id = "test-m-id"
-    label = "some station"
-    coord = (-2.0, 4.0)
-    river = "River X"
-    town = "My Town"
-    
-    half = MonitoringStation(s_id, m_id, "half", coord, (1,2), river, town)
-    quarter = MonitoringStation(s_id, m_id, "quarter", coord, (2,6), river, town)
-    one = MonitoringStation(s_id, m_id, "one", coord, (3, 6), river, town)
-    nope = MonitoringStation(s_id, m_id, "nope", coord, (3, 6), river, town)
-    half.latest_level = 1.5
-    quarter.latest_level = 3
-    one.latest_level = 6
-    nope.latest_level = None
-
-    stations = [half,quarter,one,nope]
-    high_water_level_stations = stations_level_over_threshold(stations, 0.3)
-    high_water_level_stations_names = [(station.name, level) for (station,level) in high_water_level_stations]
-
-    assert high_water_level_stations_names == [("one",1),("half",0.5)]
-
-
