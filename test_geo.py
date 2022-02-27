@@ -48,6 +48,7 @@ def test_stations_within_radius():
     assert s1, s2 in stations_within_range
     assert s4, s5 in stations_within_range
     assert not s3 in stations_within_range
+
 def test_rivers_with_station():
     #build list of stations and rivers
     stations = build_station_list()
