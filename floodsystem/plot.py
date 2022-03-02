@@ -7,8 +7,6 @@ from datetime import datetime, timedelta
 
 import numpy as np
 from numpy import polyfit
-from floodsystem.datafetcher import fetch_measure_levels, analysis
-
 
 def plot_water_levels(station, dates, levels):
     """displays a plot of the water level data against time for a station, 
