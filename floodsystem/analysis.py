@@ -9,7 +9,7 @@ from .utils import sorted_by_key
 def polyfit(dates, levels, p):
     x0 = []
     for i in dates:
-        x0.append(matplotlib.dates.date2num(i)) #converts dates to float form
+        x0.append(matplotlib.dates.date2num(i)) #converting date to float here
     x1 = []
     for i in x0:
         x1.append(i - x0[0])    # makes a list of dates shifted to a reasonable number
