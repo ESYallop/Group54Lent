@@ -12,13 +12,15 @@ def run():
     dtf = 1     # Days forward to predict
     p = 4       # Number of polynimial
     p2 = 2
-    relLevel = stations_highest_rel_level(stations, N)  # Get just the top 100 stations based on relative level
-    stationList = []
+    stationList = stations_highest_rel_level(stations, N)  # Get just the top 100 stations based on relative level
+    """stationList = []
     for relatives in relLevel:      # Getting the stations
-        stationList.append(relatives[0])
+        stationList.append(relatives)"""
 
+    print("stage 1")
     risk_calculator(stationList, dt, p, p2, dtf)    # Creates the risk levels for the objects
 
+    print("stage 2")
     townDict = {}
     for j in stations:      # Makes a dictionary of the towns using the highest risk as the towns risk
         if j.risk is not None:
@@ -33,5 +35,5 @@ def run():
         print(town, riskAlert[townDict[town]])
 
 if __name__ == "__main__":
-    print("*** Task 1G: CUED Part IA Flood Warning System ***")
+    print("*** Task 2G: CUED Part IA Flood Warning System ***")
     run()
