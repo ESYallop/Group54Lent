@@ -16,7 +16,7 @@ def plot_water_levels(station, dates, levels):
         print(station.name + " has no data available")
     else:
         plt.plot(dates, levels, label = "measured level") #data
-        plt.axhline(y=station.typical_range[0], color='r', linestyle='-', label = "typical lower bound")
+        plt.axhline(y=station.typical_range[0], color='g', linestyle='-', label = "typical lower bound")
         plt.axhline(y=station.typical_range[1], color='r', linestyle='-', label = "typical upper bound")
         plt.legend()
 

@@ -12,9 +12,9 @@ def test_plot_water_levels():
     dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=5))
     plot_water_levels(station, dates, levels)
 
-def test_plot_water_level_with_fit(station, dates, levels, p):
+def test_plot_water_level_with_fit():
     stations = build_station_list()
     update_water_levels(stations)
     station = stations[0]
     dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=5))
-    plot_water_level_with_fit(station, dates, levels)
+    plot_water_level_with_fit(station, dates, levels, 3)
